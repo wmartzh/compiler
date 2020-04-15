@@ -106,6 +106,12 @@ def analyzer(value):
 def checkTokens(value):
     if re.match(r'^\s*$',value):
         return 'blk'
+    if re.match('[0-9]',value):
+        return 'int'
+     
+    if re.match('[a-zA-Z0-9_]',value):
+        return 'int'
+     
     for op in operators:
         match = re.match(op,value)
         if match:

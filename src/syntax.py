@@ -59,6 +59,9 @@ def lineAnalyzer(line):
     ##Check if there are a comment
     elif re.findall(r'^#(.+?)',line):
         return 'comment'
+    ## Print Line
+    elif re.findall(r'^prt((.+?))\;$',line):
+        return 'print'
     
     elif re.findall(r'(.*?);$',line):
         return 'unknow_expression'
@@ -91,16 +94,13 @@ def structure_analyzer(line, statement,previous_statement,line_count):
     for char in chars:
 
         token = lexic.analyzer(char)
-
+        print(token)
         if statement is 'statement':
             if prev_token : 
-
-               
-                
+                               
                 if prev_token['type'] is 'id' and token['type'] is 'op':
                        
                     prev_token = token     
-              
                     if token['value'] == ':':
                        return {'syntax' : 'ok'}
                     else:
@@ -117,8 +117,15 @@ def structure_analyzer(line, statement,previous_statement,line_count):
                     prev_token = token     
                     return {'syntax' : 'error','message':'definition error at line '+ str(line_count)}
                 
+                elif prev_token['type'] is 'op' and token['type'] is 'id' or 'dlm':
+                    
+                    if prev_token['value'] == ':':
+                       prev_token = token    
+                       return {'syntax' : 'ok'}
+                    else:
+                       return {'syntax' : 'error', 'message':'definition error at line '+ str(line_count)}
+                
             else:
-                 
                 prev_token = token
                    
                    
@@ -134,6 +141,9 @@ def structure_analyzer(line, statement,previous_statement,line_count):
             return {'syntax' : 'ok'}
 
         elif statement is 'empty_line':
+            return {'syntax' : 'ok'}
+
+        elif statement is 'print':
             return {'syntax' : 'ok'}
 
          

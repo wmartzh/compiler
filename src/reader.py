@@ -3,9 +3,13 @@ import os
 import lexic
 import syntax
 import semantic
+import parser
 
 arg = sys.argv
 
+
+if str(arg) == 'reader.py':
+    print('Wrong usage please use the -h argument')
 if str(arg[1]) == '-c':
     extention = str(arg[2]).split('.')
     
@@ -13,19 +17,37 @@ if str(arg[1]) == '-c':
         file_open = open(arg[2])
         lines = file_open.read().splitlines()
         count = 0
-        print(semantic.analyzer(lines))
+        #parser.create_file(extention[0])
+        print(parser.parse(lines,extention[0]))
         #lexic.testTokens(lines)
           
     else:
         print('please compile a .ws file')
 elif arg[1] == '-h':
+
+        print('============================================================')
+        print( "                                           _ _           ");
+        print( "                                          (_) |          ");
+        print( " __      _____    ___ ___  _ __ ___  _ __  _| | ___ _ __ ");
+        print( " \ \ /\ / / __| / __/ _ \| '_ \` _ \| '_ \| | |/ _ \ '__|");
+        print( "  \ V  V /\__ \ | (_| (_) | | | | | | |_) | | |  __/ |   ");
+        print( "   \_/\_/ |___/  \___\___/|_| |_| |_| .__/|_|_|\___|_|   ");
+        print( "                                    | |                  ");
+        print( "                                    |_|                  ");
+        print(' ')
+        print("By Wilian and Stiff ;)")
+        print(' ')
+        print(' ')
+        print(' ')
+        print('============================================================')
+        print('Compile File: python reader.py -c <filename>')
+        print(' ')
         print('========================================')
-        print('WS Compiler')
-        print('========================================')
-        print('usage: python reader.py -c <filename>')
-        print('usage: python reader.py -c <filename>')
+
 else:
     print('Wrong usage please use the -h argument')
+
+
 
 
 

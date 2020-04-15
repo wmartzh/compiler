@@ -1,6 +1,3 @@
-ss : ss + ss;
+prt("some text");
 
-dd_s : some ;
-
-dd  : some;
-dd : sm * lr;
+nmber : 10;

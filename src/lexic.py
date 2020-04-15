@@ -50,7 +50,7 @@ delimiters=[
 ]
 indentifiers = [
     '[a-zA-Z0-9_]',
-    '[0-9]'
+    '0-9'
 ]
 
 
@@ -96,22 +96,21 @@ def analyzer(value):
             'type':'id',
             'value': value
             }
+    elif result is 'int':
+        return {
+            'type':'int',
+            'value': value
+            }
     else:
         return {
             'type':'non',
-            'value': 'non'
+            'value': value
             }
   
 ## cheack if the value is a tk or kw
 def checkTokens(value):
-    if re.match(r'^\s*$',value):
-        return 'blk'
-    if re.match('[0-9]',value):
-        return 'int'
-     
-    if re.match('[a-zA-Z0-9_]',value):
-        return 'int'
-     
+ 
+      
     for op in operators:
         match = re.match(op,value)
         if match:

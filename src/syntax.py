@@ -125,6 +125,14 @@ def structure_analyzer(line, statement,previous_statement,line_count):
                     else:
                        return {'syntax' : 'error', 'message':'definition error at line '+ str(line_count)}
                 
+                elif prev_token['type'] is 'op' and token['type'] is 'dlm' :
+                    
+                    if prev_token['value'] == ':':
+                       prev_token = token    
+                       return {'syntax' : 'ok'}
+                    else:
+                       return {'syntax' : 'error', 'message':'definition error at line '+ str(line_count)}
+                
             else:
                 prev_token = token
                    

@@ -18,8 +18,8 @@ if str(arg[1]) == '-c':
         lines = file_open.read().splitlines()
         count = 0
         #parser.create_file(extention[0])
-        print(parser.parse(lines,extention[0]))
-        #lexic.testTokens(lines)
+       # print(parser.parse(lines,extention[0]))
+        print(lexic.testTokens(lines))
           
     else:
         print('please compile a .ws file')
@@ -35,7 +35,7 @@ elif arg[1] == '-h':
         print( "                                    | |                  ");
         print( "                                    |_|                  ");
         print(' ')
-        print("By Wilian and Stiff ;)")
+        print("By Wilian and Estiff ;)")
         print(' ')
         print(' ')
         print(' ')

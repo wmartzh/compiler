@@ -26,7 +26,6 @@ def parse(lines,file_name):
         print(smtic)
 
         if smtic:
-            
             Ids = smtic['ids']
             for Id in Ids:
                 if Id is 'str_print':

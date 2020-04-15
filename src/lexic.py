@@ -96,7 +96,11 @@ def analyzer(value):
             'type':'id',
             'value': value
             }
-
+    else:
+        return {
+            'type':'non',
+            'value': 'non'
+            }
   
 ## cheack if the value is a tk or kw
 def checkTokens(value):

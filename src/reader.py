@@ -19,6 +19,10 @@ if str(arg[1]) == '-c':
     else:
         print('please compile a .ws file')
 elif arg[1] == '-h':
+        print('========================================')
+        print('WS Compiler')
+        print('========================================')
+        print('usage: python reader.py -c <filename>')
         print('usage: python reader.py -c <filename>')
 else:
     print('Wrong usage please use the -h argument')

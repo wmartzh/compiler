@@ -18,27 +18,20 @@ def oneLineBlocks(line):
 
 
 
-def analyzer(lines):
-    ##splits de characters in a line
-    line_count=1
-    previous_statement = None
+def analyzer(line,statement,previous_statement,line_count):
+    #
+    
     resul =''
-
-    for line in lines:
-        statement = lineAnalyzer(line)
-
-        serror = structure_analyzer(line,statement, previous_statement ,line_count)  
-        if serror:
-            if serror['syntax'] is 'error':
-                resul = serror
-            elif serror ['syntax'] is 'ok':
-                resul = (serror)
-               
-        previous_statement = statement
-
-        line_count = line_count+1
+    serror = structure_analyzer(line,statement, previous_statement ,line_count)  
+    #print(serror)
+    if serror:
+        if serror['syntax'] is 'error':
+            resul = serror
+        elif serror ['syntax'] is 'ok':
+            resul = serror
 
     return resul
+  
 
     
  
@@ -67,7 +60,7 @@ def lineAnalyzer(line):
     elif re.findall(r'^#(.+?)',line):
         return 'comment'
     
-    elif re.findall(r'(.+?);$',line):
+    elif re.findall(r'(.*?);$',line):
         return 'unknow_expression'
  
    
@@ -91,7 +84,7 @@ def structure_analyzer(line, statement,previous_statement,line_count):
 
     lerror = lineError(previous_statement, statement, line_count)
     if lerror != None:
-        print(lerror)
+        
         if lerror['error'] is True:
               return {'syntax' : 'error', 'message':'definition error at line '+ str(line_count)}
 
@@ -100,9 +93,10 @@ def structure_analyzer(line, statement,previous_statement,line_count):
         token = lexic.analyzer(char)
 
         if statement is 'statement':
-            if prev_token:
-                  
+            if prev_token : 
+
                
+                
                 if prev_token['type'] is 'id' and token['type'] is 'op':
                        
                     prev_token = token     
@@ -116,10 +110,8 @@ def structure_analyzer(line, statement,previous_statement,line_count):
                     prev_token = token     
                                 
                 elif prev_token['type'] is 'id' and token['type'] is 'id':
-                    print(prev_token)
-                    print(token)
                     prev_token = token     
-                    return {'syntax' : 'error','message':'definnnition error at line '+ str(line_count)}
+                    return {'syntax' : 'error','message':'definition error at line '+ str(line_count)}
 
                 elif prev_token['type'] is 'kw' and token['type'] is 'kw':
                     prev_token = token     
@@ -146,7 +138,7 @@ def structure_analyzer(line, statement,previous_statement,line_count):
 
          
         elif statement is 'unknow_expression':
-            return {'syntax' : 'error','message':'Unknow expression at line'+ str(line_count)}
+            return {'syntax' : 'error','message':'Unknow expression at line '+ str(line_count)}
     
             
 

@@ -50,7 +50,7 @@ delimiters=[
 ]
 indentifiers = [
     '[a-zA-Z0-9_]',
-    '0-9'
+ 
 ]
 
 
@@ -110,7 +110,9 @@ def analyzer(value):
 ## cheack if the value is a tk or kw
 def checkTokens(value):
  
-      
+     
+    if re.match(r'^[0-9]$',value) :
+          return 'int'
     for op in operators:
         match = re.match(op,value)
         if match:
@@ -125,6 +127,9 @@ def checkTokens(value):
     for dlm in delimiters:
         match = re.match(dlm,value)
         if match:
+            re_valuate = re.match(r'^[0-9];$',value)
+            if re_valuate :
+                return 'int'
             return 'dlm'
 
     for Id in indentifiers:

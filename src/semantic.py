@@ -29,7 +29,7 @@ def meaning_analyzer(line):
     lineAnalyzed = syntax.lineAnalyzer(line)
    
     chars = line.split()
-    print(lineAnalyzed)
+    #print(lineAnalyzed)
     mean_line = {}
     lineOperation ={}
     ids  = {}   
@@ -82,6 +82,15 @@ def meaning_analyzer(line):
                              
                          })
             
+     
+        if lineAnalyzed is 'assigment':
+            for char in chars:
+                token = lexic.analyzer(char)
+                if token['type'] is 'int':
+                    if token['value'] is ':':
+                        ids.update({'int_value':str(text)})
+                        
+                       
      
 
     mean_line = {

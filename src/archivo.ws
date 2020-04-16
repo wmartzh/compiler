@@ -1,3 +1,1 @@
-prt("some text");
-
-nmber : 10;
+prt("some text")

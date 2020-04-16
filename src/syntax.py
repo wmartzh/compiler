@@ -43,10 +43,10 @@ def lineAnalyzer(line):
     ##Check if there are a assignment
     if re.findall(r'^\s*$',line):
         return 'blank'
-    elif re.findall(r'^(.+?):(.+?);$',line):
+    elif re.findall(r'^(.+?):(.+?)$',line):
         return 'statement'
    ## cheack when there an incomplete statement
-    elif re.findall(r'^(.+?):(.+?)$',line):
+    elif re.findall(r'^(.+?):$',line):
         return 'incomplete_statement'
 
     ##start block wth kw before
@@ -60,7 +60,7 @@ def lineAnalyzer(line):
     elif re.findall(r'^#(.+?)',line):
         return 'comment'
     ## Print Line
-    elif re.findall(r'^prt((.+?))\;$',line):
+    elif re.findall(r'^prt((.+?))$',line):
         return 'print'
     
     elif re.findall(r'(.*?);$',line):
@@ -94,7 +94,7 @@ def structure_analyzer(line, statement,previous_statement,line_count):
     for char in chars:
 
         token = lexic.analyzer(char)
-        print(token)
+        #print(token)
         if statement is 'statement':
             if prev_token : 
                                

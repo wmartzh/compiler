@@ -3,8 +3,8 @@ import re
 import lexic
 import syntax
 import semantic
-
-
+import runpy
+from importlib import import_module
 states={
         'id': None,
         'kw':None,
@@ -17,7 +17,7 @@ def parse(lines,file_name):
     previous_statement = ''
     line_count=1
     path = os.path.basename("/py_files")
-    fileopen = open(path+'/'+file_name+'.py','a')
+    fileopen = open(path+'/'+file_name+'.py','w')
     
     for line in lines:
         statement = syntax.lineAnalyzer(line)
@@ -30,13 +30,13 @@ def parse(lines,file_name):
             for Id in Ids:
                 if Id is 'str_print':
                     text = Ids['str_print']
-                    ##fileopen.write("print("+text+")")
-    
+                    fileopen.write("print("+text+")")
+                  
    
-   
-    previous_statement = statement
-    line_count=line_count + 1
-    print('')
+        previous_statement = statement
+        line_count=line_count + 1
+
+
 
 
 def printer(value):
@@ -52,12 +52,14 @@ def create_file(file_name):
     path = os.path.basename("/py_files")
     access_rights = 0o755
     try:
-        os.mkdir(path, access_rights)
+       if os.path.exists(path):
+           os.remove(path)
+
+       os.mkdir(path, access_rights)
     except OSError:
         print ("Creation of the directory %s failed" % path)
     else:
         print ("Successfully created the directory %s " % path)
-
         file= open(path +'/'+ file_name+'.py',"w+")
 
           
